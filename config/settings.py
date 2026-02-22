@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+o!nzdk_d84kh8z^9#27i_$j^28xp@_w3ok1p0^1stmj*sn2iy'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+o!nzdk_d84kh8z^9#27i_$j^28xp@_w3ok1p0^1stmj*sn2iy')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
 
 # Application definition
@@ -163,7 +163,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe API Settings
-STRIPE_API_KEY = os.getenv('STRIPE_API_KEY', 'sk_test_51...')
+# Stripe API Settings
+STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
 
 # Celery Settings
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
