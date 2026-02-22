@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.filters import OrderingFilter
@@ -34,7 +35,20 @@ class PaymentListAPIView(generics.ListAPIView):
     ordering_fields = ('payment_date',)
 
 class PaymentCreateAPIView(generics.CreateAPIView):
+    """
+    Endpoint for creating a payment.
+    Creates a Stripe product, price, and checkout session.
+    Returns the payment link in the response.
+    """
     serializer_class = PaymentSerializer
+
+    @extend_schema(
+        summary="Create Payment",
+        description="Creates a payment and returns a Stripe checkout link.",
+        responses={201: PaymentSerializer}
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         payment = serializer.save(user=self.request.user)
@@ -56,9 +70,18 @@ class PaymentCreateAPIView(generics.CreateAPIView):
         payment.save()
 
 class PaymentStatusAPIView(generics.RetrieveAPIView):
+    """
+    Endpoint for checking payment status.
+    Retrieves the latest status from Stripe using the session ID.
+    """
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
 
+    @extend_schema(
+        summary="Check Payment Status",
+        description="Retrieves the current status of a payment from Stripe.",
+        responses={200: PaymentSerializer}
+    )
     def get(self, request, *args, **kwargs):
         payment = self.get_object()
         if payment.session_id:

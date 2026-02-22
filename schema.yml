@@ -144,13 +144,32 @@ paths:
   /api/materials/course/subscribe/:
     post:
       operationId: materials_course_subscribe_create
+      description: Toggles a user's subscription to a specific course.
+      summary: Toggle Course Subscription
       tags:
       - materials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course:
+                  type: integer
+              required:
+              - course
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+          description: ''
   /api/materials/courses/:
     get:
       operationId: materials_courses_list
@@ -718,6 +737,8 @@ paths:
   /api/users/payments/create/:
     post:
       operationId: users_payments_create_create
+      description: Creates a payment and returns a Stripe checkout link.
+      summary: Create Payment
       tags:
       - users
       requestBody:
@@ -744,6 +765,8 @@ paths:
   /api/users/payments/status/{id}/:
     get:
       operationId: users_payments_status_retrieve
+      description: Retrieves the current status of a payment from Stripe.
+      summary: Check Payment Status
       parameters:
       - in: path
         name: id
