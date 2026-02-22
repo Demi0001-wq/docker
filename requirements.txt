@@ -142,8 +142,8 @@ orjson==3.11.5
 ortools==9.14.6206
 outcome==1.3.0.post0
 packaging==25.0
-pandas==3.0.0
-pandas-stubs==3.0.0.260204
+pandas==2.2.3
+pandas-stubs==2.2.3.241126
 parso==0.8.6
 passlib==1.7.4
 pathspec==1.0.4
