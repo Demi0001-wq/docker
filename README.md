@@ -97,7 +97,7 @@ Configure the following secrets in your GitHub repository (`Settings -> Secrets 
 - `SERVER_USER`: Your SSH username (e.g., `ubuntu`).
 - `SERVER_SSH_KEY`: Your private SSH key (RSA/ED25519).
 - `DJANGO_SECRET_KEY`: A secure random string for Django's `SECRET_KEY`.
-- `STRIPE_API_KEY`: Your Stripe secret api key.
+- `STRIPE_API_KEY`: Your Stripe secret api key (Example: `sk_test_...`).
 
 ### 3. CI/CD Workflow
 The project includes a GitHub Actions workflow in `.github/workflows/deploy.yml` that:
@@ -146,7 +146,7 @@ To enable automated deployment, your remote server should:
 
 ### GitHub Secrets Configuration
 
-For the workflow to work, add the following secrets in your GitHub repository settings (**Settings > Secrets and variables > Actions**):
+For the workflow to work, add the following secrets in your GitHub repository settings (Settings > Secrets and variables > Actions**):
 
 - \DJANGO_SECRET_KEY\: Your Django secret key.
 - \SERVER_HOST\: IP address or domain of your remote server.
@@ -159,8 +159,6 @@ For other variables (Stripe, Email), refer to \env.sample\ and add them as secre
 
 ---
 
-## Submission
-The changes have been pushed to a new branch. You can create the pull request using the link below:
 
-[Create Pull Request](https://github.com/Demi0001-wq/docker/compare/develop...task-cicd-setup)
+
 
