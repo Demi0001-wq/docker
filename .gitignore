@@ -151,3 +151,11 @@ cython_debug/
 
 # PyCharm
 .idea/
+
+# Local env files
+.env
+.env.*
+!.env.sample
+
+# Docker
+docker-compose.override.yml
