@@ -100,3 +100,4 @@ class MaterialsTestCase(APITestCase):
         # Moderator can edit course
         response = self.client.patch(detail_url, {'name': 'Updated by Mod'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+

@@ -1,3 +1,9 @@
 from django.test import TestCase
+from .models import User
 
-# Create your tests here.
+class UserTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(email="test@example.com", password="password")
+
+    def test_user_email(self):
+        self.assertEqual(self.user.email, "test@example.com")
